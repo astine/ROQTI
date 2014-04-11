@@ -1,9 +1,6 @@
-require_relative "stock.rb"
-require_relative "data_handler.rb"
-require_relative "File_Handler.rb"
-require_relative "portfolio.rb"
-require_relative "account.rb"
-require_relative "brokerage.rb"
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/lib'))
+
+require "ROQTI"
 
 # 1 - create a portfolio
 ted = Portfolio.new("Ted")

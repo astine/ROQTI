@@ -5,7 +5,7 @@ class Asset
     @portfolio_object = args[:portfolio_object] # attach asset to a portfolio object
     @quantity = args[:quantity]
     @price = args[:price]
-    #@dividend_price = #how do i get dividend price here? put something in the attr_reader?
+    @reinvest = reinvest
     
 
     @security_object.add_shares_to_brokerage(@quantity)
@@ -14,7 +14,12 @@ class Asset
     #@data_handler = DataHandler.new(self)
     #@num_shares = num_shares
   end
-
+  
+  def reinvest 
+    #@reinvest = "yes"
+    @reinvest = "no"
+  end
+  
   def portfolio_object
     return @portfolio_object
   end
@@ -41,11 +46,15 @@ class Asset
   end
   
   def pay_dividend(year, month, day, dividend)
-    total_dividend = @quantity * dividend
-    @portfolio_object.pay_dividend(year, month, day, total_dividend)
+    if @reinvest == "yes" then
+      reinvest_stock = ((@price - dividend) / @price.to_f).round(2)
+      #return reinvest_stock
+      puts reinvest_stock
+    else
+      total_dividend = @quantity * dividend
+      @portfolio_object.pay_dividend(year, month, day, total_dividend)
+    end
   end
-    
   
-  
-
 end
+    

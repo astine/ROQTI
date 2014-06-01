@@ -1,7 +1,7 @@
 class Security
-  def initialize(ticker_symbol, num_shares = 0)
+  def initialize(data_source, ticker_symbol, num_shares =  0)
     @ticker_symbol = ticker_symbol
-    @data_handler = DataHandler.new(self)
+    @data_source = data_source
     @num_shares_in_brokerage = num_shares
     @assets = {}
   end
@@ -26,7 +26,7 @@ class Security
   end
   
   def day_closing_price(year, month, day)
-    return @data_handler.retrieve(year, month, day).to_f
+    return @data_source.retrieve(@ticker_symbol, year, month, day)["close"].to_f
   end
   
 end

@@ -1,12 +1,13 @@
 require 'date'
 
 class Portfolio
-  def initialize(name, cash=0, account=nil)
+  def initialize(data_source, name, cash=0, account=nil)
     @name = name
     @cash = cash
     @account = account
     @assets = {} #asset objects
     @purchases = []
+    @data_source = data_source
   end
   
   def get_assets()
@@ -34,7 +35,7 @@ class Portfolio
 
   #testing method
   def add_stock(ticker_symbol, num_shares, purchase_price)
-    new_stock = Stock.new(ticker_symbol, num_shares)
+    new_stock = Stock.new(@data_source, ticker_symbol, num_shares)
     add_to_purchases([ticker_symbol, num_shares, purchase_price, DateTime.now()])
     add_to_assets(ticker_symbol, new_stock)
   end

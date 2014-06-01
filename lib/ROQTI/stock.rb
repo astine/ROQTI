@@ -1,14 +1,7 @@
 class Stock < Security # i've made this a subclass of asset... that may or may not be a good thing
-  def initialize(ticker_symbol, num_shares = 0)
-    super(ticker_symbol, num_shares)
+  def initialize(data_source, ticker_symbol, num_shares = 0)
+    super(data_source, ticker_symbol, num_shares)
   end
-
-  
-  def refresh_data(source_file)
-    @data_handler.refresh(source_file)
-  end
-
-
 
   def ticker_symbol()
     return @ticker_symbol
